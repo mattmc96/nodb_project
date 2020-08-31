@@ -1,22 +1,22 @@
 [
-    {
-       "id":0,
-       "title":"Clean shower",
-       "desc":"It's really messy"
-    },
-    {
-       "id":1,
-       "title":"Go to movies",
-       "desc":"It's really messy"
-    },
-    {
-       "id":2,
-       "title":"Sweep floor",
-       "desc":"It's really messy"
-    },
-    {
-       "id":3,
-       "title":"find something",
-       "desc":"I lost something"
- }
+   {
+      "id": 0,
+      "title": "Clean house",
+      "desc": "Because it's dirty"
+   },
+   {
+      "id": 1,
+      "title": "Practice writing code",
+      "desc": "Because I need to"
+   },
+   {
+      "id": 2,
+      "title": "Go to movies",
+      "desc": "That's what I need to do"
+   },
+   {
+      "id": 3,
+      "title": "Find something",
+      "desc": "I lost something"
+   }
 ]
