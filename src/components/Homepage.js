@@ -90,7 +90,13 @@ class Homepage extends Component {
             Delete
           </button>
         </form>
-        {/* <Items /> */}
+        {/* <div>
+          {this.state.map((post) => {
+            const { id, title, desc } = post;
+            return <div key={id}>{title}</div>;
+          })}
+        </div> */}
+        {/* const taskDisplay = this.state.data.map((d)) */}
       </div>
     );
   }
