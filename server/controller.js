@@ -2,7 +2,7 @@ const data = require("./data.json");
 
 let taskId = data[data.length - 1].id + 1;
 
-let tasks = [];
+// let tasks = [];
 
 module.exports = {
   //   addTask: (req, res) => {
@@ -16,13 +16,11 @@ module.exports = {
     res.status(200).send(data);
   },
   addTask: (req, res) => {
-    console.log(req.body);
-    const { title, desc } = req.body;
-
+    const { title } = req.body;
+    console.log(title, taskId);
     const newTask = {
       id: taskId,
       title,
-      desc,
     };
 
     data.push(newTask);

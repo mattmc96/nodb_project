@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 
-// import Items from "./Items";
+import Items from "./Items";
 
 import axios from "axios";
 
 class Homepage extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      task: "",
+      task: [],
+      input: "",
     };
-
-    this.addTask = this.addTask.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
   handleOnChange = (e) => {
-    this.setState({ task: e.target.value });
+    this.setState({ input: e.target.value });
   };
-  handleSubmit = (e) => {
+  handleOnSubmit = (e) => {
+    this.setState({ task: e.target.value });
     e.preventDefault();
   };
 
@@ -41,9 +42,9 @@ class Homepage extends Component {
     });
   }
 
-  addTask = (id, title) => {
+  addTask = () => {
     axios
-      .post("/api/task", { taskId: id, title })
+      .post("/api/task", { title: this.state.input })
       .then((res) => {
         this.setState({ tasks: res.data });
       })
@@ -52,22 +53,28 @@ class Homepage extends Component {
       });
   };
 
-  // editTask = (id) => {
-  //   axios.put(`/api/task/${taskId}`).then((res) => {
-  //     this.setState({
-  //       task: res.data,
-  //     });
-  //   });
-  // };
-  // deleteTask = (taskId) => {
-  //   axios.delete(`/api/task/${taskId}`).then((res) => {
-  //     this.setState({
-  //       task: res.data,
-  //     });
-  //   });
-  // };
+  editTask = (title, task) => {
+    axios
+      .put(`/api/task/${task}`, { title })
+      .then((res) => {
+        this.setState({
+          task: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  render() {
+  deleteTask = (task) => {
+    axios.delete(`/api/task/${task}`).then((res) => {
+      this.setState({
+        task: res.data,
+      });
+    });
+  };
+
+  render(props) {
     return (
       <div className="homepage">
         <form id="to-do-form">
@@ -79,24 +86,21 @@ class Homepage extends Component {
           <button type="submit" onClick={this.addTask} className="add-btn">
             Add
           </button>
-          <button type="submit" onClick={this.editTask} className="edit-btn">
-            Edit
-          </button>
-          <button
-            type="submit"
-            onClick={this.deleteTask}
-            className="delete-btn"
-          >
-            Delete
-          </button>
         </form>
-        {/* <div>
-          {this.state.map((post) => {
+        <div className="list-items">
+          {this.state.task.map((post) => {
             const { id, title, desc } = post;
-            return <div key={id}>{title}</div>;
+            return (
+              <Items
+                key={id}
+                title={title}
+                deleteTask={this.deleteTask}
+                editTask={this.editTask}
+                id={id}
+              />
+            );
           })}
-        </div> */}
-        {/* const taskDisplay = this.state.data.map((d)) */}
+        </div>
       </div>
     );
   }
